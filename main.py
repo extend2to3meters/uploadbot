@@ -3,6 +3,8 @@ import re
 import uuid
 from threading import Thread
 import asyncio
+import socket
+import os
 
 import config
 import downloader
@@ -37,3 +39,10 @@ async def on_message(message):
 
 
 client.run(config.botSecret)
+
+try:
+    port = os.getenv("PORT", 5000) # heroku bullshit
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(("", port))
+except:
+    pass
